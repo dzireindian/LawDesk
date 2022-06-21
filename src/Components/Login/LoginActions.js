@@ -1,0 +1,50 @@
+import $ from 'jquery';
+import {LoginLoadAction} from "../../Redux/Actions";
+
+export function Signin(){
+    let fieldDisable = (value) => {
+        $('#loginCheck').prop('disabled', value);
+    }
+
+    fieldDisable(true);
+
+    var formBodySerialized = $('#LoginForm').serializeArray();
+    let formBody = {};
+    $.each(formBodySerialized, function(i, field){
+        formBody[field.name] = field.value;
+    });
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(formBody);
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    return (dispatch) => {
+        dispatch(LoginLoadAction(true));
+        fetch("https://rohithstartupauthenticator.herokuapp.com/api/auth/login/", requestOptions)
+        .then(response => response)
+        .then(result => {
+          if(result.status === 200){
+              var response = result.json();
+              console.log("response for login =",response)
+              fieldDisable(false);
+              localStorage.setItem('token',response.refreshToken);
+              window.location = "/DashBoard";
+            //   dispatch(LoginLoadAction(false));
+          }
+        })
+        .catch(error => {
+            fieldDisable(false);
+            console.log('error', error)
+            dispatch(LoginLoadAction(false));
+        });
+    }
+
+}

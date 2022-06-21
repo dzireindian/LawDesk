@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+//import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css';
+
+import {Routes,Navigate,BrowserRouter,Route} from "react-router-dom";
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Home from './Pages/Home/Home';
+import LoaderEffect from './utils/Loader/LoaderEffect';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="modalMessages" className="modal-fade modal-dialog modal-dialog-centered" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+    </div>
+    <BrowserRouter>
+    <Routes>
+        <Route exact path="/" element={localStorage.getItem("token")?(<Navigate to="/Dashboard" replace={true} />):<LoaderEffect><Home/></LoaderEffect>}/>
+        <Route exact path="/DashBoard" element={localStorage.getItem("token")?<LoaderEffect><Dashboard/></LoaderEffect> : (<Navigate to="/" replace={true} />)}/>
+    </Routes>
+    </BrowserRouter>
     </div>
   );
 }
