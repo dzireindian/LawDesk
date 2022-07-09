@@ -1,1 +1,2 @@
 export const LOGIN_LOAD = "LOGIN_LOAD";
+export const AUTHENTICATE = "AUTHENTICATE";

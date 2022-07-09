@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 
 function LoaderEffect(props) {
     let loadState = useSelector(state => state.LoadReducer);
+    // let AuthState = useSelector(state => state.AuthenticateReducer);
     const defaultOptions = {
         loop: true,
         autoplay: true,

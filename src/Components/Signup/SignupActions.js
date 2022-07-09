@@ -53,7 +53,7 @@ export function Register(){
             var response = result.json();
             console.log("Signup response =",response);
             fieldDisable(false);
-            localStorage.setItem('token',response.refreshToken);
+            sessionStorage.setItem('token',response.refreshToken);
             window.location = "/DashBoard";
         }
     })

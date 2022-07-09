@@ -30,12 +30,12 @@ export function Signin(){
         dispatch(LoginLoadAction(true));
         fetch("https://rohithstartupauthenticator.herokuapp.com/api/auth/login/", requestOptions)
         .then(response => response)
-        .then(result => {
+        .then(async (result) => {
           if(result.status === 200){
-              var response = result.json();
-              console.log("response for login =",response)
+              var response = await result.json();
+              console.log("response for login =",response);
               fieldDisable(false);
-              localStorage.setItem('token',response.refreshToken);
+              sessionStorage.setItem('token',response.refreshToken);
               window.location = "/DashBoard";
             //   dispatch(LoginLoadAction(false));
           }
