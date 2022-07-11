@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import {LoginLoadAction} from "../../Redux/Actions";
+import {ClientDB} from "../../utils/ClientDB/ClientDB";
 
 export function Signin(){
     let fieldDisable = (value) => {
@@ -36,6 +37,9 @@ export function Signin(){
               console.log("response for login =",response);
               fieldDisable(false);
               sessionStorage.setItem('token',response.refreshToken);
+              sessionStorage.setItem('userID',response.refreshToken);
+              ClientDB();
+            //   var db = ClientDB(sessionStorage.getItem('userID'));
               window.location = "/DashBoard";
             //   dispatch(LoginLoadAction(false));
           }

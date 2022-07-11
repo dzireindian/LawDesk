@@ -16,8 +16,8 @@ function App() {
     </div>
     <BrowserRouter>
     <Routes>
-        <Route exact path="/" element={localStorage.getItem("token")?(<Navigate to="/Dashboard" replace={true} />):<LoaderEffect><Home/></LoaderEffect>}/>
-        <Route exact path="/DashBoard" element={localStorage.getItem("token")?<LoaderEffect><Dashboard/></LoaderEffect> : (<Navigate to="/" replace={true} />)}/>
+        <Route exact path="/" element={sessionStorage.getItem("token")?(<Navigate to="/Dashboard" replace={true} />):<LoaderEffect><Home/></LoaderEffect>}/>
+        <Route exact path="/DashBoard" element={sessionStorage.getItem("token")?<LoaderEffect><Dashboard/></LoaderEffect> : (<Navigate to="/" replace={true} />)}/>
     </Routes>
     </BrowserRouter>
     </div>

@@ -5,10 +5,13 @@ import RightPane from "../RightPane/RightPane";
 export function ActivateLeftTab(event){
     $('#leftPaneButtonGroup').children('button').each(function(){
         var elementID = $(this).attr('id');
-        if(event.id == elementID){
-            $(this).attr("class", "btn btn-primary")
+        console.log("elementID for button =",elementID,"event id = ",event.id );
+        if(event.id === elementID){
+            console.log("set class for left tab");
+            $(this).attr("class", "btn btn-primary");
+        }else{
+            $(this).attr("class","btn btn-outline-primary");
         }
-        $(this).attr("btn btn-outline-primary");
     });
 
     var RightDomElement = document.getElementById("RightPane");

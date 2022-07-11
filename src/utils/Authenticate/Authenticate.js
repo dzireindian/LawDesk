@@ -6,7 +6,7 @@ export function Authenticate() {
         
         var raw = JSON.stringify({
           "headers": {
-            "Authorization": localStorage.getItem('token'),
+            "Authorization": sessionStorage.getItem('token'),
           }
         });
         
@@ -18,10 +18,10 @@ export function Authenticate() {
         };
         
         
-        return (dispatch) => {
+        return async (dispatch) => {
         console.log("Authenticate action  =",AuthenticateAction(false));
         dispatch(AuthenticateAction(true));
-        fetch("https://rohithstartupauthenticator.herokuapp.com/api/auth/refresh_token", requestOptions)
+        await fetch("https://rohithstartupauthenticator.herokuapp.com/api/auth/refresh_token", requestOptions)
           .then(response => response)
           .then(result => {
             if(result.status === 200){
@@ -30,12 +30,12 @@ export function Authenticate() {
                     dispatch(AuthenticateAction(false));
                 }
             }else{
-                localStorage.clear();
+                sessionStorage.clear();
                 window.location = "/";
             }
         })
         .catch(error => {
             console.log('error', error);
-        })
+        });
     }
 }

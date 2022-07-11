@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 
 function LoaderEffect(props) {
     let loadState = useSelector(state => state.LoadReducer);
-    // let AuthState = useSelector(state => state.AuthenticateReducer);
+    let AuthState = useSelector(state => state.AuthenticateReducer);
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -15,7 +15,7 @@ function LoaderEffect(props) {
       };
 
 
-      return  loadState.load ? <Lottie 
+      return  (loadState.load || AuthState.Authenticated ) ? <Lottie 
       options={defaultOptions}
       height={400}
       width={400}

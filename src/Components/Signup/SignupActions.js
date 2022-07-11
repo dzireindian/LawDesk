@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import {LoginLoadAction} from "../../Redux/Actions";
+import {ClientDB} from '../../utils/ClientDB/ClientDB';
 
 export function Register(){
     var password = $('#registerPassword').val();
@@ -54,6 +55,9 @@ export function Register(){
             console.log("Signup response =",response);
             fieldDisable(false);
             sessionStorage.setItem('token',response.refreshToken);
+            sessionStorage.setItem('userID',response.refreshToken);
+            ClientDB();
+            // var db = ClientDB(sessionStorage.getItem('userID'));
             window.location = "/DashBoard";
         }
     })

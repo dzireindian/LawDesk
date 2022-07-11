@@ -1,5 +1,9 @@
-import * as PouchDB from "pouchdb";
+import PouchDB from "pouchdb";
+export var db;
 
-var db = new PouchDB(sessionStorage.getItem('userID'));
+export var ClientDB = () => {
+    var DB = sessionStorage.getItem('token');
+    db = new PouchDB(DB);
 
-export default db;
+    return db;
+}

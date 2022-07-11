@@ -1,11 +1,11 @@
 import {useSelector,useDispatch} from "react-redux";
 import {Authenticate} from "../../utils/Authenticate/Authenticate";
+import { Clients} from "../../Consts/Consts";
 import LeftPane from "../../Components/LeftPane/LeftPane";
 import RightPane from "../../Components/RightPane/RightPane";
 
 function Dashboard(){
     let Authenticated = useSelector(state => state.AuthenticateReducer.Authenticated);
-    let RightPaneState = useSelector(state => state.RightPaneState);
     let dispatch = useDispatch();
     
     if(Authenticated === false){
@@ -14,10 +14,10 @@ function Dashboard(){
 
     return (<div className="container">
     <div className="col-sm-4">
-    <LeftPane/>
+    {<LeftPane/>}
     </div>
     <div id="RightPane" className="col">
-    <RightPane tabs={RightPaneState.tabs} />
+    {<RightPane id={Clients}/>}
     </div>
     </div>);
 }
